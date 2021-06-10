@@ -16,6 +16,9 @@
 // MARK: - XCGLogger
 /// The main logging class
 open class XCGLogger: CustomDebugStringConvertible {
+
+    open var writeBlock : ((String) -> String)?
+    
     // MARK: - Constants
     public struct Constants {
         /// Prefix identifier to use for all other identifiers

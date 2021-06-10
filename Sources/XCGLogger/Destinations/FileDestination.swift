@@ -233,7 +233,11 @@ open class FileDestination: BaseQueuedDestination {
     /// - Returns:  Nothing
     ///
     open override func write(message: String) {
-        if let encodedData = "\(message)\n".data(using: String.Encoding.utf8) {
+        var str = message
+        if let block = XCGLogger.default.writeBlock {
+            str = block(message)
+        }
+        if let encodedData = "\(str)\n".data(using: String.Encoding.utf8) {
             _try({
                 self.logFileHandle?.write(encodedData)
             },
